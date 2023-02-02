@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import Search from './Search'
+import WeatherData from './WeatherData';
+import GetWeatherData from './WeatherService';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const defaultImageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQL-oP1o-wM07-Mj1S7MNhCXit7vYC97Wigg&usqp=CAU';
+
+class App extends Component {
+
+  initialState = {
+    town: '',
+    temperature: 0,
+    image: defaultImageUrl,
+  }
+
+  state = this.initialState
+
+  getWeatherData = (town) => {
+
+    // weather api logic to go here
+    console.log('Get weather data')
+    GetWeatherData(town, this.onWeatherDataLoaded)
+    console.log('Weather data retrieved')
+
+  }
+
+  onWeatherDataLoaded = (data) => {
+    alert('weather data loaded!');
+    
+    this.setState({
+      town: data.town,
+      temperature: data.temperature,
+      image: data.image,
+    });
+  }
+
+  render() {
+    return <div>
+      <Search updateWeatherData={this.getWeatherData} />
+      <WeatherData props={this.state} />
     </div>
-  );
+  }
 }
 
 export default App;
