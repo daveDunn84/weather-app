@@ -16,17 +16,11 @@ class App extends Component {
   state = this.initialState
 
   getWeatherData = (town) => {
-
     // weather api logic to go here
-    console.log('Get weather data')
     GetWeatherData(town, this.onWeatherDataLoaded)
-    console.log('Weather data retrieved')
-
   }
 
   onWeatherDataLoaded = (data) => {
-    alert('weather data loaded!');
-    
     this.setState({
       town: data.town,
       temperature: data.temperature,
