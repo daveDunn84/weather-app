@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    return <div>
+    return <div className='bg-blue-200'>
       <Search updateWeatherData={this.getWeatherData} />
       <WeatherData props={this.state} />
     </div>
